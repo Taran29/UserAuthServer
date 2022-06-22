@@ -1,10 +1,11 @@
 import express from 'express'
 import { User } from '../models/user.js'
+import auth from '../middlewares/auth.js'
 import _ from 'lodash'
 
 const router = express.Router()
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
   try {
     await User.findByIdAndUpdate(req.params.id, {
       $set: {
