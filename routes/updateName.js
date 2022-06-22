@@ -8,7 +8,7 @@ router.put('/:id', async (req, res) => {
   try {
     await User.findByIdAndUpdate(req.params.id, {
       $set: {
-        name: JSON.parse(req).name
+        name: req.body.name
       }
     })
   } catch (ex) {
