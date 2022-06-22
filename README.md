@@ -15,10 +15,10 @@ It has four main <b>route handlers</b>:
    It handles logging in existing users. First, it checks if the user exists, and then it checks if the password is correct. If both of those qualify, then again, authentication token is generated using User model instance, and relevant user information is sent back to the client.
    
 3. forgotPassword.js<br>
-   It has three routes.<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;a. The first route is a GET request which takes in user email as a request parameter, then checks if the user exists, and returns the security &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;question that the user had entered.<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;b. The second route is a POST request which validates incoming answer from the client with the hashed answer already stored on the &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server using bcrypt. If the answer is correct, it generates a new JWT, called the x-forgot-password-token, attaches it to the response &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;header, and sends a success message back to the client.<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;c. The third route is also a POST request, which handles updating the password on MongoDB. It validates the incoming password, checks &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for x-forgot-password-token in the request headers. If both of those qualify, it hashed the incoming password and updates it on &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MongoDB.
+   It has three routes:
+   1. The first route is a GET request which takes in user email as a request parameter, then checks if the user exists, and returns the security question that the user had entered.
+   2. The second route is a POST request which validates incoming answer from the client with the hashed answer already stored on the server using bcrypt. If the answer is correct, it generates a new JWT, called the x-forgot-password-token, attaches it to the response header, and sends a success message back to the client.
+   3. The third route is also a POST request, which handles updating the password on MongoDB. It validates the incoming password, checks for x-forgot-password-token in the request headers. If both of those qualify, it hashed the incoming password and updates it on MongoDB.
    
 4. updateName.js<br>
    It handles updating the name of existing users. It uses the middleware "auth.js" before executing its own function. If auth succeeds, then it atomically updates the name on MongoDB.
